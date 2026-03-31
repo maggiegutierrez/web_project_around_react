@@ -1,4 +1,6 @@
-export default function NewCard(props) {
+import "../../index.css";
+
+export default function NewCard() {
   return (
     <form className="popup__form" id="new-card-form" noValidate>
       <input

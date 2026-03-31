@@ -4,6 +4,7 @@ import "../../index.css";
 import NewCard from "../NewCard/NewCard";
 import EditAvatar from "../Avatar/EditAvatar";
 import EditProfile from "../EditProfile/EditProfile";
+import ImagePopup from "../ImagePopup/ImagePopup";
 import Popup from "./Popup";
 import Card from "../Card/Card";
 
@@ -35,6 +36,7 @@ function Main() {
     title: "Editar perfil",
     children: <EditProfile />,
   };
+  const imagePopup = {};
 
   function handleOpenPopup(popup) {
     setPopup(popup);

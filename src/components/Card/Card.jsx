@@ -1,8 +1,9 @@
 import "../../index.css";
+import ImagePopup from "../ImagePopup/ImagePopup";
 
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
-
+  const ImageComponent = {};
   return (
     <li className="card">
       <img className="card__image" src={link} alt={name} />
