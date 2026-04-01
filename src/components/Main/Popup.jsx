@@ -1,7 +1,6 @@
 import "../../index.css";
 
 export default function Popup(props) {
-  //los hijos son el contenido de la ventana emergente
   const { onClose, title, children } = props;
 
   return (

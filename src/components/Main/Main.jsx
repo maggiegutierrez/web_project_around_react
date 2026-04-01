@@ -4,8 +4,8 @@ import "../../index.css";
 import NewCard from "../NewCard/NewCard";
 import EditAvatar from "../Avatar/EditAvatar";
 import EditProfile from "../EditProfile/EditProfile";
-import ImagePopup from "../ImagePopup/ImagePopup";
 import Popup from "./Popup";
+import ImagePopup from "../ImagePopup/ImagePopup";
 import Card from "../Card/Card";
 
 const cards = [
@@ -36,7 +36,6 @@ function Main() {
     title: "Editar perfil",
     children: <EditProfile />,
   };
-  const imagePopup = {};
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -90,28 +89,14 @@ function Main() {
       <section className="cards page__section">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card
+              key={card._id}
+              card={card}
+              handleOpenPopup={handleOpenPopup}
+            />
           ))}
         </ul>
       </section>
-      <template id="card-template">
-        <li className="card">
-          <img className="card__image" src="" alt="" />
-          <button
-            aria-label="Eliminar tarjeta"
-            className="card__delete-button"
-            type="button"
-          ></button>
-          <div className="card__description">
-            <h2 className="card__title"></h2>
-            <button
-              aria-label="Botón Me gusta"
-              className="card__like-button"
-              type="button"
-            ></button>
-          </div>
-        </li>
-      </template>
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}

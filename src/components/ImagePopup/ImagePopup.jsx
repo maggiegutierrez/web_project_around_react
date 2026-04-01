@@ -1,11 +1,11 @@
 import "../../index.css";
 
 export default function ImagePopup(props) {
-  const { src, caption } = props;
+  const { link, name } = props.card;
   return (
     <div className="popup__content popup__content_content_image">
-      <img alt={caption} className="popup__image" src={src} />
-      <p className="popup__caption">{caption}</p>
+      <img alt={name} className="popup__image" src={link} />
+      <p className="popup__caption">{name}</p>
     </div>
   );
 }
