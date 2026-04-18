@@ -1,5 +1,4 @@
-import "../../index.css";
-import ImagePopup from "../ImagePopup/ImagePopup";
+import ImagePopup from "../popup/ImagePopup/ImagePopup";
 
 export default function Card(props) {
   const { name, link, isLiked } = props.card;

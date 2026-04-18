@@ -1,33 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import avatar from "../../../images/avatar.jpg";
-import "../../index.css";
-import NewCard from "../NewCard/NewCard";
-import EditAvatar from "../Avatar/EditAvatar";
-import EditProfile from "../EditProfile/EditProfile";
-import Popup from "./Popup";
-import ImagePopup from "../ImagePopup/ImagePopup";
-import Card from "../Card/Card";
-
-const cards = [
-  {
-    isLiked: false,
-    _id: "5d1f0611d321eb4bdcd707dd",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:10:57.741Z",
-  },
-  {
-    isLiked: false,
-    _id: "5d1f064ed321eb4bdcd707de",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:11:58.324Z",
-  },
-];
+import NewCard from "./components/popup/NewCard/NewCard";
+import EditAvatar from "./components/popup/Avatar/EditAvatar";
+import EditProfile from "./components/popup/EditProfile/EditProfile";
+import Popup from "./components/popup/Popup";
+import ImagePopup from "./components/popup/ImagePopup/ImagePopup";
+import Card from "./components/Card/Card";
+import api from "../../utils/api";
 
 function Main() {
+  //const [avatar, setAvatar] = useState(avatar);
+  const [cards, setCards] = useState([]);
   const [popup, setPopup] = useState(null);
 
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
@@ -44,6 +27,12 @@ function Main() {
   function handleClosePopup() {
     setPopup(null);
   }
+
+  useEffect(() => {
+    api.getInitialCards().then((data) => {
+      setCards(data);
+    });
+  }, []);
 
   return (
     <main className="content">

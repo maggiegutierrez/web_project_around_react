@@ -1,5 +1,3 @@
-import "../../index.css";
-
 export default function Popup(props) {
   const { onClose, title, children } = props;
 

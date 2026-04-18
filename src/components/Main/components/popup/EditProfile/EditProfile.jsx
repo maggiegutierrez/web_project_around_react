@@ -1,5 +1,3 @@
-import "../../index.css";
-
 export default function EditProfile() {
   return (
     <form className="popup__form" id="edit-profile-form" noValidate>
