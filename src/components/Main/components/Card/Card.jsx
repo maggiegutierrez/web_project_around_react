@@ -3,10 +3,12 @@ import ImagePopup from "../popup/ImagePopup/ImagePopup";
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
   const handleOpenPopup = props.handleOpenPopup;
+  const handleLikeClick = props.onCardLike;
   const ImageComponent = {
     title: null,
     children: <ImagePopup card={props.card} />,
   };
+  const cardLikeButtonName = `card__like-button ${isLiked ? "card__like-button_is-active" : ""}`;
 
   return (
     <li className="card">
@@ -25,8 +27,9 @@ export default function Card(props) {
         <h2 className="card__title">{name}</h2>
         <button
           aria-label="Botón Me gusta"
-          className="card__like-button"
+          className={cardLikeButtonName}
           type="button"
+          onClick={handleLikeClick}
         ></button>
       </div>
     </li>
