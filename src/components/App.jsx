@@ -14,8 +14,14 @@ function App() {
     });
   }, []);
 
+  const handleUpdateUser = (data) => {
+    api.patchUserData(data).then((newData) => {
+      setCurrentUser(newData);
+    });
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
       <div className="page__content">
         <Header />
         <Main />

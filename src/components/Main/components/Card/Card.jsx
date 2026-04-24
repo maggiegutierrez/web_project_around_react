@@ -1,9 +1,13 @@
 import ImagePopup from "../popup/ImagePopup/ImagePopup";
+import { useContext } from "react";
+import CurrentUserContext from "../../../../contexts/CurrentUserContext";
 
 export default function Card(props) {
+  const { currentUser } = useContext(CurrentUserContext);
   const { name, link, isLiked } = props.card;
   const handleOpenPopup = props.handleOpenPopup;
   const handleLikeClick = props.onCardLike;
+  const handleDeleteClick = props.onCardDelete;
   const ImageComponent = {
     title: null,
     children: <ImagePopup card={props.card} />,
@@ -22,6 +26,7 @@ export default function Card(props) {
         aria-label="Eliminar tarjeta"
         className="card__delete-button"
         type="button"
+        onClick={handleDeleteClick}
       ></button>
       <div className="card__description">
         <h2 className="card__title">{name}</h2>
