@@ -9,10 +9,16 @@ import Card from "./components/Card/Card";
 import api from "../../utils/api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Main() {
+function Main(props) {
   const { currentUser } = useContext(CurrentUserContext);
-  const [cards, setCards] = useState([]);
-  const [popup, setPopup] = useState(null);
+
+  const popup = props.popup;
+  const handleOpenPopup = props.onOpenPopup;
+  const justClosePopup = props.onClosePopup;
+
+  const handleCardLike = props.onCardLike;
+  const handleCardDelete = props.onCardDelete;
+  const cardsList = props.cards;
 
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
   const editAvatarPopup = { title: "Cambiar avatar", children: <EditAvatar /> };
@@ -20,45 +26,6 @@ function Main() {
     title: "Editar perfil",
     children: <EditProfile />,
   };
-
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
-
-  function handleClosePopup() {
-    setPopup(null);
-  }
-
-  async function handleCardLike(card) {
-    const isLiked = card.isLiked;
-    await api
-      .likeCard(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard,
-          ),
-        );
-      })
-      .catch((error) => console.error(error));
-  }
-
-  async function handleCardDelete(card) {
-    await api
-      .deleteCardData(card._id)
-      .then(() => {
-        setCards((state) =>
-          state.filter((currentCard) => currentCard._id !== card._id),
-        );
-      })
-      .catch((error) => console.error(error));
-  }
-
-  useEffect(() => {
-    api.getInitialCards().then((data) => {
-      setCards(data);
-    });
-  }, []);
 
   return (
     <main className="content">
@@ -109,7 +76,7 @@ function Main() {
       </section>
       <section className="cards page__section">
         <ul className="cards__list">
-          {cards.map((card) => (
+          {cardsList.map((card) => (
             <Card
               key={card._id}
               card={card}
@@ -123,7 +90,7 @@ function Main() {
         </ul>
       </section>
       {popup && (
-        <Popup onClose={handleClosePopup} title={popup.title}>
+        <Popup onClose={justClosePopup} title={popup.title}>
           {popup.children}
         </Popup>
       )}

@@ -54,12 +54,16 @@ class API {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then((res) => {
-      if (!res.ok) {
-        return Promise.reject(res.status);
-      }
-      return res.json();
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(res.status);
+        }
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(`ERROR HONEY: ${err}`);
+      });
   }
 
   postCardData(data) {
@@ -70,13 +74,17 @@ class API {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      return Promise.reject(res.status);
-    });
+        return Promise.reject(res.status);
+      })
+      .catch((err) => {
+        console.log(`ERROR HONEY: ${err}`);
+      });
   }
 
   deleteCardData(_id) {
@@ -105,9 +113,9 @@ class API {
     });
   }
 
-  getWebData() {
+  /*getWebData() {
     return Promise.all([this.getUserData(), this.getInitialCards()]);
-  }
+  }*/
 }
 
 const api = new API({
