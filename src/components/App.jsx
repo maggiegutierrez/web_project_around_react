@@ -62,6 +62,7 @@ function App() {
         setCards((state) =>
           state.filter((currentCard) => currentCard._id !== card._id),
         );
+        handleClosePopup();
       })
       .catch((error) => console.error(error));
   }
@@ -71,6 +72,11 @@ function App() {
       setCards(data);
     });
   }, []);
+
+  function confirmationCardDelete() {
+    handleOpenPopup();
+    handleCardDelete();
+  }
 
   async function handleAddPlaceSubmit(data) {
     await api.postCardData(data).then((newCard) => {
@@ -85,6 +91,7 @@ function App() {
         currentUser,
         handleUpdateUser,
         handleUpdateAvatar,
+        handleCardDelete,
         handleAddPlaceSubmit,
       }}
     >
@@ -96,7 +103,7 @@ function App() {
           popup={popup}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onCardDelete={confirmationCardDelete}
         />
         <Footer />
       </div>

@@ -6,6 +6,7 @@ import EditProfile from "./components/popup/EditProfile/EditProfile";
 import Popup from "./components/popup/Popup";
 import ImagePopup from "./components/popup/ImagePopup/ImagePopup";
 import Card from "./components/Card/Card";
+import RemoveCardPopup from "./components/popup/RemoveCard/RemoveCard";
 import api from "../../utils/api";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -26,6 +27,11 @@ function Main(props) {
     title: "Editar perfil",
     children: <EditProfile />,
   };
+  const removeCardPopup = (card) => ({
+    title: "¿Estás seguro/a?",
+    children: <RemoveCardPopup card={card} />,
+    type: "delete",
+  });
 
   return (
     <main className="content">
@@ -84,13 +90,15 @@ function Main(props) {
               onCardLike={() => {
                 handleCardLike(card);
               }}
-              onCardDelete={() => handleCardDelete(card)}
+              onCardDelete={() => {
+                handleOpenPopup(removeCardPopup(card));
+              }}
             />
           ))}
         </ul>
       </section>
       {popup && (
-        <Popup onClose={justClosePopup} title={popup.title}>
+        <Popup onClose={justClosePopup} title={popup.title} type={popup.type}>
           {popup.children}
         </Popup>
       )}

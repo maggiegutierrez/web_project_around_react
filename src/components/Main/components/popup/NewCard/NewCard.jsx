@@ -13,7 +13,6 @@ export default function NewCard() {
     const name = nameInputRef.current.value;
     const link = linkInputRef.current.value;
     onAddPlaceSubmit({ name, link });
-    console.log({ name, link });
   };
 
   return (
